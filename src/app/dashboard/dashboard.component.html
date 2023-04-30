@@ -1,0 +1,139 @@
+<div class="row z-depth-1 black">
+  <div class="col m12 s12">
+    <app-header></app-header>
+  </div>
+</div>
+<div class="row " >
+  <div class="col s6 offset-s3 ">
+
+    <div class="example-button-row">
+      <button (click)="callDialog('feedback')" mat-fab extended color="primary">
+        <mat-icon>forum</mat-icon>
+        feedback
+      </button>
+      <button (click)="callDialog('note')" mat-fab extended color="accent">
+        <mat-icon>note</mat-icon>
+        leave note
+      </button>
+      <button (click)="callDialog('session')" mat-fab extended color="warn">
+        <mat-icon>attach_money</mat-icon>
+        session
+      </button>
+      <button (click)="callDialog('language')" mat-fab extended color="dark">
+        <mat-icon>translate</mat-icon>
+        language
+      </button>
+      <button (click)="callDialog('parking')" mat-fab extended routerLink=".">
+        <mat-icon><span class="material-symbols-rounded">
+          local_parking
+          </span></mat-icon>
+        parking
+      </button>
+    </div>
+
+  </div>
+  
+</div>
+<div class="divider"></div>
+<div class="row"></div>
+<div class="row" >
+    <div class="col s2 offset-s0   ">
+        <h3 class=" center z-depth-3 purple white-text"  style="padding:3px;font-family: 'Cairo', sans-serif; font-size:25px">Pick Cateogry </h3>
+    </div>
+    <div class="col s5 offset-s1 offset-s0   " *ngIf="foodDetailsStatus">
+      <h3 class=" center z-depth-3 orange white-text"  style="padding:3px;font-family: 'Cairo', sans-serif; font-size:25px">Pick Food </h3>
+  </div>
+</div>
+
+<div class="row "   >
+  <div class="col s2 m2 " style="overflow-y: scroll;height:72vh">
+    <div class="row" *ngFor="let food of foodsMenu"  >
+      <div class="col s9 offset-s1 z-depth-2">
+        <div class="card wave-effect waves-teal">
+          <div class="card-image waves-effect waves-block waves-light  " (click)="showFoodDetails(food)">
+            <img [src]="food.picture" class="responsive-img">       
+         
+          </div>
+          <div class="card-action">
+            <span class="card-title" style="font-weight:bold;font-size:20px;font-family: 'Exo 2', sans-serif;">{{food.category}}</span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="foodDetailsStatus" class="col m5 offset-m1 animate__animated animate__fadeIn" >
+       <app-food-details [foodDetails]="foodDetails" (childEvent)="selectedFood($event)">
+
+       </app-food-details>
+  </div>
+ 
+  <div *ngIf="foodDetailsStatus" class="col m4  animate__animated animate__fadeIn" >
+        <div class="row">
+           <div class="col s12 m12" *ngIf="foodSelectionForProces && foodSelectionForProces.length!=0">
+                  <div class="row"></div>
+                  <div class="row"></div>
+                  <div class="row"></div>
+         
+                  <div class="row" >
+                     <div class="col m11 offset-m1">
+                      <h3 class=" center z-depth-3 teal white-text"  style="padding:3px;font-family: 'Cairo', sans-serif; font-size:25px"> My Order List </h3>
+
+                     </div>
+                  </div> 
+                   <div class="row " *ngIf="foodSelectionForProces" [ngStyle]="{'pointer-events': order_button_status==true?'none':'auto' }" >
+                   
+                      <div class="col s12 m12 animate__animated animate__fadeIn">
+                            <div class="row" style="overflow-y: scroll;height:24vh">
+                              <ng-container *ngFor="let orderFood of foodSelectionForProces" >
+                                <div class="col m4 offset-m2 " >
+                                  <h3 style="font-size: 22px; font-weight:bold;font-family: 'Cairo', sans-serif;"><span style="color:rgb(75, 0, 0)">{{orderFood.qty}}</span> &nbsp;<span style="color:rgb(68, 0, 255)">{{orderFood.name}}</span>  </h3>
+                             
+                                </div>
+                                
+                                <div class="col m4  offset-m2 " >
+                                  <h3 style="font-size: 22px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(3, 2, 0)">{{orderFood.price | currency :'IQD '}}</h3>
+                               
+                                </div>
+                            
+                           </ng-container>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col m9  offset-m2">
+                                <textarea id="note" [(ngModel)]="order_note" class="materialize-textarea"></textarea>
+                                <label for="note" style="font-size: 22px;font-weight:bold;font-family: 'Cairo', sans-serif;">Add Note</label>
+                              </div>
+                            </div> 
+                           
+                      </div>
+                    
+                 </div> 
+                 
+                <div class="row " *ngIf="foodSelectionForProces">
+                  <div class="col m4 offset-m2" >
+                    <h3 style="font-size: 22px; font-weight:bold;font-family: 'Cairo', sans-serif;color:rgb(3, 2, 0)">Total Amount </h3>
+               
+                  </div>
+                  
+                  <div class="col m4  offset-m2  " >
+                    <h3 style="font-size: 22px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(3, 2, 0)">{{getTotal() | currency :'IQD '}}</h3>
+                 
+                  </div>
+                    
+                 
+                 </div> 
+                <div class="row"  *ngIf="foodSelectionForProces">
+                <div class="col m10 offset-m2">
+                  <button [disabled]="order_button_status" (click)="passOrderToWaiter()" style="font-size: 20px;font-weight:bold;font-family: 'Cairo', sans-serif;" class="btn waves-effect waves-light purple btn-large" type="submit" name="action">PASS ORDER TO WAITER
+                    <i class="material-icons right">arrow_outward</i>
+                  </button>
+                </div>
+             </div>
+
+           </div>
+        </div>
+</div>
+
+</div>
+
+

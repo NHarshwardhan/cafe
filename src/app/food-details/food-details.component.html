@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col s12 m12 center">
+    <h2 class="header" style="font-weight:bold;font-size:20px;font-family: 'Exo 2', sans-serif;">{{foodDetails.category}}</h2>
+</div>
+<div class="row">
+  <div class="col s12 m12" style="overflow-y: scroll;height:68vh">
+    <div class="row" *ngFor="let food of foodDetails.foodname">
+      <div class="col s12 m12 center" >
+        <div class="card horizontal small z-depth-2">
+          <div class="card-image ">
+            <img class="materialboxed"  [src]="food.imgSrc">
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+                 <h1 style="color:green">{{food.name}}</h1>
+                 <h2 style="color:crimson">{{food.price | currency :'IQD '}}</h2>
+                 <mat-icon style="color: orange" *ngFor="let i of counter(food.rating)">star</mat-icon>
+               
+            </div>
+            <div class="card-action ">
+              <mat-button-toggle-group #group="matButtonToggleGroup">
+                <mat-button-toggle (click)="changeQty(food,group.value)" value="minus" aria-label="Text align minus">
+                  <mat-icon style="color: purple;">remove</mat-icon>
+                </mat-button-toggle>
+                <mat-button-toggle readonly >
+                  <strong style="font-size: 25px;">{{food.qty}}</strong>
+                </mat-button-toggle>
+                <mat-button-toggle  style="color: purple;" (click)="changeQty(food,group.value)"  value="plus" color="accent" aria-label="Text align plus">
+                  <mat-icon>add</mat-icon>
+                </mat-button-toggle>
+              </mat-button-toggle-group>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

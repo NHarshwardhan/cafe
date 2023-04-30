@@ -1,0 +1,272 @@
+<div class="row z-depth-1 black">
+  <div class="col m12 s12">
+    <app-header></app-header>
+  </div>
+</div>
+<div class="row ">
+  <div class="col s12 m12 " style="overflow-y: scroll; height: 90vh">
+
+     <ng-container *ngFor="let orderInfo of orderDetails;" >
+
+      <div class="card medium">
+        <div class="row" >
+          <div
+            class="col s3 m3 center z-depth-0"
+            style="margin-top: 1%; margin-left: 1%"
+          >
+            <div class="row">
+              <div class="col s12 center">
+                <mat-icon style="color: rgb(255, 150, 14)"
+                  >monetization_on</mat-icon
+                >
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 m12 center">
+                <h3
+                  style="
+                    font-size: 50px;
+                    font-weight: bold;
+                    font-family: 'Cairo', sans-serif;
+                    color: rgb(0, 0, 2);
+                  "
+                >
+                  TOKEN NO
+                </h3>
+                &nbsp;&nbsp;
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 m12">
+                <h3
+                  style="
+                    font-size: 43px;
+                    font-weight: normal;
+                    font-family: 'Cairo', sans-serif;
+                    color: rgb(5, 3, 126);
+                  "
+                >
+                  {{orderInfo.id}}
+                </h3>
+                &nbsp;&nbsp;
+              </div>
+            </div>
+
+            <div
+              class="row z-depth-2"
+              style="background-color: rgb(255, 252, 252)"
+            >
+              <div
+                class="col m9 offset-m1 center"
+                style="text-align: left; padding: 14px"
+              >
+                <button mat-button color="primary">
+                  <mat-icon>info</mat-icon>
+                  <span style="font-size: 20px">Special Instructions: </span>
+                </button>
+                <p
+                  style="
+                    text-align: left;
+                    margin-top: 3%;
+                    margin-left: 8%;
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: rgb(114, 1, 1);
+                  "
+                >
+                {{orderInfo.note}}
+                </p>
+                &nbsp;&nbsp;
+              </div>
+            </div>
+          </div>
+          <div class="col m1" style="overflow-y: scroll; height: 43vh"></div>
+
+          <div class="col m3 offset-m1 center z-depth-0">
+            <div class="row">
+              <div class="col m12">
+                <h3
+                  class="center z-depth-3 teal white-text"
+                  style="
+                    padding: 3px;
+                    font-family: 'Cairo', sans-serif;
+                    font-size: 25px;
+                  "
+                >
+                  <mat-icon>restaurant</mat-icon>&nbsp; ORDER SUMMARY
+                </h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 m12 animate__animated animate__fadeIn" style="overflow-y: scroll;height:34vh">
+
+                 <ng-container *ngFor="let food of orderInfo.order_summary ; let i=index" >
+
+                  <div class="row" >
+
+                    <div class="col m6" >
+                      <h3
+                        style="
+                          text-align:start;
+                          font-size: 20px;
+                          font-weight: bold;
+                          font-family: 'Cairo', sans-serif;
+                        "
+                      >
+                        <span style="color: rgb(75, 0, 0)">{{food.qty}}</span> &nbsp; x
+                        &nbsp;<span style="color: rgb(68, 0, 255)">{{food.name}}</span>
+                      </h3>
+                    </div>
+
+                    <div class="col m5 offset-m1">
+                      <h3
+                        style="
+                          font-size: 22px;
+                          font-weight: bold;
+                          font-family: 'Cairo', sans-serif;
+                          color: rgb(3, 2, 0);
+                        "
+                      >
+                        {{food.price | currency : "IQD " }}
+                      </h3>
+                    </div>
+                  </div>
+
+
+                 </ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="col m1" style="overflow-y: scroll; height: 43vh"></div>
+
+          <div
+            class="col m2 m2 center z-depth-0"
+            style="margin-top: 2%; margin-left: 1%"
+          >
+
+            <div class="row">
+              <div class="col s12 m12 center">
+                <h3
+                  style="
+                    font-size: 30px;
+                    font-weight: normal;
+                    font-family: 'Cairo', sans-serif;
+                    color: rgb(25, 77, 235);
+                  "
+                >
+                  <mat-icon>payments</mat-icon> Payable Amount
+                </h3>
+                &nbsp;&nbsp;
+                <h3
+                  style="
+                    font-size: 30px;
+                    font-weight: bold;
+                    font-family: 'Cairo', sans-serif;
+                    color: rgb(127, 0, 247);
+                  "
+                >
+                  &nbsp;{{ orderInfo.total_amount | currency : "IQD " }}
+                </h3>
+                &nbsp;&nbsp;
+              </div>
+            </div>
+            <div class="row"  >
+              <div class="col m11 offset-m1">
+                <button (click)="orderProcessInfo(orderInfo,'accept')" [disabled]="orderInfo.order_accepted"
+                  style="
+                    font-size: 19px;
+                    font-weight: bold;
+                    font-family: 'Cairo', sans-serif;
+                  "
+                  class="btn waves-effect waves-light white-text deep-purple darken-4 btn-flat"
+                  type="submit"
+                  name="action"
+                >
+                  Order Accepted&nbsp;&nbsp;&nbsp;
+                  <i class="material-icons right">check_circle</i>
+                </button>
+                <br/> <br/>
+                <button (click)="orderProcessInfo(orderInfo,'prepare')" [disabled]="orderInfo.order_preparing"
+                  style="
+                    font-size: 19px;
+                    font-weight: bold;
+                    font-family: 'Cairo', sans-serif;
+                  "
+                  class="btn waves-effect waves-light white-text orange darken-4 btn-flat"
+                  type="submit"
+                  name="action"
+                >
+                  Order Preparing
+                  <i class="material-icons right">soup_kitchen</i>
+                </button>
+                <br/> <br/>
+                <button (click)="orderProcessInfo(orderInfo,'deliver')" [disabled]="orderInfo.order_delivered"
+                  style="
+                    font-size: 19px;
+                    font-weight: bold;
+                    font-family: 'Cairo', sans-serif;
+                  "
+                  class="btn waves-effect waves-light white-text green btn-flat"
+                  type="submit"
+                  name="action"
+                >
+                  Order Delivered&nbsp;
+                  <i class="material-icons right">done_all</i>
+                </button>
+
+                <!-- <h3
+                  *ngIf="orderInfo.orderCompleted"
+                  class=" z-depth-3 teal-text flow-text"
+                  style="
+                    text-align:start;
+                    padding: 19px;
+                    border:1px solid rgb(3, 109, 25);
+                    font-weight:bold;
+                    font-family: 'Cairo', sans-serif;
+                    font-size: 18px;
+                  "
+                >
+
+                 <span style="color:rgb(3, 109, 25)"> ORDER STATUS : &nbsp;</span> <span style="  font-weight:bolder;color:rgb(3, 109, 25)"> Delivered</span>
+                </h3>
+                <h3
+                   *ngIf="!orderInfo.orderCompleted"
+                  class=" z-depth-3 teal-text flow-text"
+                  style="
+                    text-align:start;
+                    border:1px solid rgb(246, 6, 6);
+                    padding: 19px;
+                    font-weight:bold;
+                    font-family: 'Cairo', sans-serif;
+                    font-size: 18px;
+                  "
+                >
+
+                 <span style="color:rgb(246, 6, 6);"> ORDER STATUS :&nbsp;</span> <span style="  font-weight:bold;color:rgb(246, 6, 6)"> Preparing</span>
+                </h3> -->
+
+              </div>
+            </div>
+            <div class="row"></div>
+            <!-- <div class="row">
+              <div class="col m10 offset-m1">
+                <p>
+                  <label>
+                    <input type="checkbox" />
+                    <span style="color: rgb(1, 57, 66); font-weight: bold"
+                      >Marked Order Completed
+                    </span>
+                  </label>
+                </p>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="row"></div>
+      <div class="row"></div>
+
+     </ng-container>
+
+  </div>
+</div>

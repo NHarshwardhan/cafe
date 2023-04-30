@@ -1,0 +1,74 @@
+
+<div mat-dialog-content class="mat-typography">
+    <div *ngIf="data.mode=='feedback'">
+           <h1>Feddback</h1>
+    </div>
+    <div *ngIf="data.mode=='note'">
+      <h1>note</h1>
+    </div>
+    <div *ngIf="data.mode=='session'">
+      <h1>session</h1>
+    </div>
+    <div *ngIf="data.mode=='language'">
+      <h1>language</h1>
+    </div>
+    <div *ngIf="data.mode=='parking'">
+      <h1>parking</h1>
+    </div>
+    <div *ngIf="data.mode=='confirmation'">
+      <div class="row">
+       <div class="col m10  center " >
+         <h3 style="font-size: 22px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(3, 2, 0)"> <mat-icon>eco</mat-icon> &nbsp; Order Confirmation &nbsp; <mat-icon>eco</mat-icon></h3>
+      
+       </div>
+      </div>
+      <div class="row">
+       <div class="col m10   center " >
+         <h3 style="font-size: 22px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(3, 2, 0)">Are You Sure To Pass Your Order &nbsp; <mat-icon>question_mark</mat-icon> </h3>
+      
+       </div>
+      </div>
+      <div class="row mat-dialog-actions">
+        <div class="col m10   center " >
+          <button mat-button (click)="closeDialog()">Wait</button> &nbsp;&nbsp;
+          <button mat-button [mat-dialog-close]="agree" cdkFocusInitial>Yes</button>       
+        </div>
+       </div>
+ </div>
+    <div *ngIf="data.mode=='passed_order'">
+         <div class="row">
+          <div class="col m10  center " >
+            <h3 style="font-size: 22px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(3, 2, 0)"> <mat-icon>eco</mat-icon> &nbsp; Thank You..! &nbsp; <mat-icon>eco</mat-icon></h3>
+         
+          </div>
+         </div>
+         <div class="row">
+          <div class="col m10   center " >
+            <h3 style="font-size: 22px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(3, 2, 0)">Your Order has Successfully Passed</h3>
+         
+          </div>
+         </div>
+         <div class="row ">
+          <div class="col m12  center  mat-dialog-actions" >
+            <h3 style="font-size: 30px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(231, 104, 0)">Waiter is Coming Soon to Your Table, Enjoy Your Meal</h3> &nbsp;&nbsp;
+                
+          </div>
+         </div>
+         <div class="row ">
+          <div class="col m10  center " >
+            <h3 style="font-size: 34px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(0, 15, 231)">TOKEN NO : {{data.tokenId}}</h3> &nbsp;&nbsp;
+                
+          </div>
+         </div>
+         <div class="row ">
+          <div class="col m10  center  " >
+           
+            <button   [mat-dialog-close]="agree" style="font-size: 16px;font-weight:bold;font-family: 'Cairo', sans-serif;" class="btn waves-effect waves-light purple btn-large">Return To Food Menu / New Order
+                 <i class="material-icons right">restaurant_menu</i>
+            </button>
+          </div>
+         </div>
+    </div>
+
+ 
+</div>
