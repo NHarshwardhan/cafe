@@ -8,7 +8,7 @@ import { Observable, ReplaySubject, share, tap, timer,BehaviorSubject } from 'rx
 export class FoodService {
 
   // url = 'http://localhost:3000'
-  url = 'https://json-server-five-green.vercel.app/'
+  url = 'https://json-server-five-green.vercel.app'
 
   constructor(private http: HttpClient) { }
   rating = new BehaviorSubject<any>(0)
