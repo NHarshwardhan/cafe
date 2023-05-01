@@ -22,3 +22,7 @@
   border-radius: 10px;
   height: 100px;
 }
+
+body{
+   background-image: none !important;
+}

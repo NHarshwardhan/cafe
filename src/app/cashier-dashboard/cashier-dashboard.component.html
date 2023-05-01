@@ -6,7 +6,7 @@
 <div class="row ">
   <div class="col s12 m12 " style="overflow-y: scroll; height: 90vh">
 
-     <ng-container *ngFor="let orderInfo of orderDetails;" >
+     <ng-container *ngFor="let orderInfo of orderDetails.reverse();" >
 
       <div class="card medium">
         <div class="row" >
@@ -170,6 +170,15 @@
                 &nbsp;&nbsp;
               </div>
             </div>
+            <div class="row" *ngIf="orderInfo.payment_mode">
+              <div class="col m11 ">
+                 <label>
+                  <input type="checkbox" [checked]="orderInfo.paid_status" />
+                  <span style="font-weight: bolder; font-size:19px"> PAID BY : {{orderInfo.payment_mode | uppercase}} </span>
+                </label>
+
+              </div>
+            </div>
             <div class="row"  >
               <div class="col m11 offset-m1">
                 <!-- <button
@@ -248,19 +257,27 @@
 
               </div>
             </div>
-            <div class="row"></div>
-            <div class="row">
-              <div class="col m10 offset-m1">
-                <p>
-                  <label>
-                    <input type="checkbox" />
-                    <span style="color: rgb(1, 57, 66); font-weight: bold"
-                      >Marked Order Completed
-                    </span>
-                  </label>
-                </p>
+
+            <div class="row" *ngIf="orderInfo.calling_waiter">
+              <div class="col m10 offset-m1 pulse">
+                <h2 style="font-size: 20px; color:rgb(234, 34, 34)">
+
+                  <a class="btn-floating btn cyan pulse"><i class="material-icons">call</i></a>
+                  customer is calling..
+                </h2>
               </div>
             </div>
+            <div class="row" *ngIf="orderInfo.rating">
+              <div class="col m10 offset-m1">
+
+
+                  <span style="font-size: 20px;color:purple"> Rating :  <mat-icon style="color: orange" *ngFor="let i of counter(orderInfo.rating)">star</mat-icon> </span>
+
+
+              </div>
+            </div>
+
+
           </div>
         </div>
       </div>

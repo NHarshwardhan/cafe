@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
   }
   passOrderToWaiter(){
 
-      let orderDetails = {order_summary:[...this.foodSelectionForProces],total_amount:this.getTotal(),note:this.order_note,orderCompleted: "waiting",order_preparing: false,order_accepted: false, order_delivered: false,}
+      let orderDetails = {order_summary:[...this.foodSelectionForProces],total_amount:this.getTotal(),note:this.order_note,orderCompleted: "waiting",order_preparing: false,order_accepted: false, order_delivered: false, calling_waiter:false,payment_mode:"",paid_status:false,rating:0}
       const dialogRef = this.dialog.open(DialogBoxContentComponent,
         {
         width: '50vw',
@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit {
                                   this.order_button_status= false
                                   this.order_note=''
                                   this.foodSelectionForProces=[]
-                                  this.router.navigate(['/'])
+                                  this.router.navigate(['/home'])
                               },
                               error:(reject)=>{
                                       console.log(reject)

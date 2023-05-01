@@ -19,56 +19,123 @@
       <div class="row">
        <div class="col m10  center " >
          <h3 style="font-size: 22px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(3, 2, 0)"> <mat-icon>eco</mat-icon> &nbsp; Order Confirmation &nbsp; <mat-icon>eco</mat-icon></h3>
-      
+
        </div>
       </div>
       <div class="row">
        <div class="col m10   center " >
          <h3 style="font-size: 22px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(3, 2, 0)">Are You Sure To Pass Your Order &nbsp; <mat-icon>question_mark</mat-icon> </h3>
-      
+
        </div>
       </div>
       <div class="row mat-dialog-actions">
         <div class="col m10   center " >
           <button mat-button (click)="closeDialog()">Wait</button> &nbsp;&nbsp;
-          <button mat-button [mat-dialog-close]="agree" cdkFocusInitial>Yes</button>       
+          <button mat-button [mat-dialog-close]="agree" cdkFocusInitial>Yes</button>
         </div>
        </div>
- </div>
+   </div>
     <div *ngIf="data.mode=='passed_order'">
          <div class="row">
           <div class="col m10  center " >
             <h3 style="font-size: 22px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(3, 2, 0)"> <mat-icon>eco</mat-icon> &nbsp; Thank You..! &nbsp; <mat-icon>eco</mat-icon></h3>
-         
+
           </div>
          </div>
          <div class="row">
           <div class="col m10   center " >
             <h3 style="font-size: 22px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(3, 2, 0)">Your Order has Successfully Passed</h3>
-         
+
           </div>
          </div>
          <div class="row ">
           <div class="col m12  center  mat-dialog-actions" >
             <h3 style="font-size: 30px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(231, 104, 0)">Waiter is Coming Soon to Your Table, Enjoy Your Meal</h3> &nbsp;&nbsp;
-                
+
           </div>
          </div>
          <div class="row ">
           <div class="col m10  center " >
             <h3 style="font-size: 34px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(0, 15, 231)">TOKEN NO : {{data.tokenId}}</h3> &nbsp;&nbsp;
-                
+
           </div>
          </div>
          <div class="row ">
           <div class="col m10  center  " >
-           
+
             <button   [mat-dialog-close]="agree" style="font-size: 16px;font-weight:bold;font-family: 'Cairo', sans-serif;" class="btn waves-effect waves-light purple btn-large">Return To Food Menu / New Order
                  <i class="material-icons right">restaurant_menu</i>
             </button>
           </div>
          </div>
     </div>
+    <div *ngIf="data.mode=='check_order_status'">
+      <div class="row">
+        <div class="input-field col s7 m7">
 
- 
+          <i class="material-icons prefix">search</i>
+          <input id="icon_token" [(ngModel)]="token" type="number" class="validate" >
+          <label for="icon_token">TOKEN NUMBER</label>
+        </div>
+
+        <div class="col m4 offset-m1 ">
+          <br>
+          <button  [mat-dialog-close]="token" style="font-size: 15px;"  class="btn waves-effect waves-light  purple accent-4 btn-medium" type="submit" name="action">CHECK STATUS
+            <i class="material-icons right">arrow_outward</i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="data.mode=='pay_bill'" >
+       <div class="row">
+         <div class="col m12 center">
+          <h3 style="font-size: 20px;font-weight:bold;font-family: 'Cairo', sans-serif; color:rgb(231, 104, 0)">Please Select Payment Mode</h3> &nbsp;&nbsp;
+         </div>
+       </div>
+     <div class="row">
+       <div class="col m12 center">
+
+          <label >
+            <input class="with-gap" value="cash" [(ngModel)]="token" name="payment" type="radio" checked />
+            <span style="font-size: 20px;">CASH</span>
+          </label>
+          &nbsp;  &nbsp;  &nbsp;
+          <label >
+            <input class="with-gap" value="card" [(ngModel)]="token" name="payment" type="radio"  />
+            <span style="font-size: 20px;">CARD</span>
+          </label>
+
+
+       </div>
+     </div>
+     <div class="row">
+      <div class="col 7 offset-m5">
+        <br>
+        <button  [mat-dialog-close]="token" style="font-size: 15px;"  class="btn waves-effect waves-light  purple accent-4 btn-medium" type="submit" name="action">PAY
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+     </div>
+    </div>
+
+    <div *ngIf="data.mode=='share_exp'">
+
+        <div class="row">
+          <div class="col s12 m12 center">
+              <h2 style="color:crimson">Share Your Experience with us </h2>
+
+              <button  [mat-dialog-close]="rating"  mat-icon-button style="color:rgb(236, 182, 4)"
+                  *ngFor="let ratingId of ratingArray;
+                  index as i" [id]="'star_'+i"  (click)="calculateRating(i+1)">
+
+                      <i class=" material-icons"> {{ iconStatus(i) }}</i>
+                  </button>
+
+
+        </div>
+
+    </div>
+
+
 </div>

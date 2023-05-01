@@ -1,15 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject, share, tap, timer } from 'rxjs';
+import { Observable, ReplaySubject, share, tap, timer,BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodService {
 
-  url = 'https://json-server-five-green.vercel.app'
+  // url = 'http://localhost:3000'
+  url = 'https://json-server-five-green.vercel.app/'
 
   constructor(private http: HttpClient) { }
+  rating = new BehaviorSubject<any>(0)
 
   getFoodsMenu():Observable<any>{
      return this.http.get(`${this.url}/foodsMenu`)
@@ -25,6 +27,10 @@ export class FoodService {
 
             )
   }
+
+  getOrderInfoById(token:number):Observable<any>{
+    return this.http.get(`${this.url}/orderedMenu/${token}`)
+ }
 
   getOrderSummary():Observable<any>{
     return this.http.get(`${this.url}/orderedMenu`)

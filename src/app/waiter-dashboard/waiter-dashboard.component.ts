@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FoodService } from '../food.service';
+import { switchMap,Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-waiter-dashboard',
@@ -12,11 +13,13 @@ export class WaiterDashboardComponent {
   btnPrepareDisable =  false
   btnDeliverDisable =  false
   orderTokenId = 0
+  subscription !: Subscription;
   constructor(private foodService:FoodService){}
 
   ngOnInit(): void {
-    this.foodService.getOrderSummary().subscribe({
-
+    this.subscription = timer(0, 2000).pipe(
+      switchMap(() => this.foodService.getOrderSummary())
+    ).subscribe({
       next:(response)=>{
           this.orderDetails = response
 
@@ -49,5 +52,30 @@ export class WaiterDashboardComponent {
             console.log(reason)
           })
         })
+  }
+
+  customer_attended(orderInfo:any){
+
+      orderInfo.calling_waiter = false
+      this.foodService.updateOrderStatus(orderInfo).subscribe({
+        next:()=>{
+
+        },
+        error:(reason=>{
+          console.log(reason)
+        })
+      })
+  }
+
+  paid(orderInfo:any){
+    orderInfo.paid_status = true
+    this.foodService.updateOrderStatus(orderInfo).subscribe({
+      next:()=>{
+
+      },
+      error:(reason=>{
+        console.log(reason)
+      })
+    })
   }
 }

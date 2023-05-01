@@ -15,7 +15,10 @@ import { FoodDetailsComponent } from './food-details/food-details.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {FormsModule} from '@angular/forms';
 import { CashierDashboardComponent } from './cashier-dashboard/cashier-dashboard.component';
-import { WaiterDashboardComponent } from './waiter-dashboard/waiter-dashboard.component'
+import { WaiterDashboardComponent } from './waiter-dashboard/waiter-dashboard.component';
+import { HomeComponent } from './home/home.component'
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,14 +27,15 @@ import { WaiterDashboardComponent } from './waiter-dashboard/waiter-dashboard.co
     DialogBoxContentComponent,
     FoodDetailsComponent,
     CashierDashboardComponent,
-    WaiterDashboardComponent
+    WaiterDashboardComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,MatIconModule,MatDialogModule,
-    HttpClientModule,MatButtonToggleModule,FormsModule
+    HttpClientModule,MatButtonToggleModule,FormsModule,MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

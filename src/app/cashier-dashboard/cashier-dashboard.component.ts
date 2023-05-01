@@ -52,6 +52,11 @@ export class CashierDashboardComponent implements OnInit, OnDestroy{
     //  })
   }
 
+  counter(i: number) {
+    return new Array(i);
+  }
+
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
